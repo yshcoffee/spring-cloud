@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/yshcoffee/spring-cloud-server:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/yshcoffee/spring-cloud-server:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: spring-cloud-server
+        chartPath: charts/spring-cloud-server
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/yshcoffee/spring-cloud-server'
+          image.tag: '{{.DIGEST_HEX}}'
