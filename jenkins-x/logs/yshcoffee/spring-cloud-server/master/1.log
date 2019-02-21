@@ -1,0 +1,91 @@
+Step: build-step-credential-initializer:
+
+{"level":"warn","ts":1550710447.5054567,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1550710447.5057518,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-0:
+
+{"level":"warn","ts":1550710451.6353526,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1550710453.0065944,"logger":"fallback-logger","caller":"git-init/main.go:92","msg":"Successfully cloned \"https://github.com/yshcoffee/spring-cloud-server.git\" @ \"master\" in path \"/workspace\""}
+Step: build-step-jenkins:
+
+Picked up _JAVA_OPTIONS: -Xmx400m
+Started
+Running in Durability level: PERFORMANCE_OPTIMIZED
+  16.763 [id=39]	WARNING	i.f.k.c.i.VersionUsageUtils#alert: The client is using resource type 'customresourcedefinitions' with unstable version 'v1beta1'
+[Pipeline] node
+Running on Jenkins in /tmp/jenkinsTests.tmp/jenkins1322025199459086405test/workspace/job
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withCredentials
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (CI Build and push snapshot)
+Stage "CI Build and push snapshot" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Release)
+[Pipeline] git
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/yshcoffee/spring-cloud-server.git # timeout=10
+Fetching upstream changes from https://github.com/yshcoffee/spring-cloud-server.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/yshcoffee/spring-cloud-server.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 3a7df7b26a0abeac411d65d09b609287eb397b7e (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3a7df7b26a0abeac411d65d09b609287eb397b7e
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 3a7df7b26a0abeac411d65d09b609287eb397b7e
+Commit message: "fix:(plugins) use a better version of maven plugins"
+First time build. Skipping changelog.
+[Pipeline] sh
++ jx-release-version
++ echo 0.0.1
+[Pipeline] sh
++ cat VERSION
++ mvn versions:set -DnewVersion=0.0.1
+Picked up _JAVA_OPTIONS: -Xmx400m
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective settings
+[WARNING] 'servers.server.id' must be unique but found duplicate server with id nexus @ /root/.m2/settings.xml
+[WARNING] 
+[INFO] Scanning for projects...
+[INFO] Downloading from nexus: http://nexus/repository/maven-group/org/springframework/boot/spring-boot-starter-parent/2.1.2.RELEASE/spring-boot-starter-parent-2.1.2.RELEASE.pom
+[ERROR] [ERROR] Some problems were encountered while processing the POMs:
+[FATAL] Non-resolvable parent POM for com.tmax:spring-cloud-server:0.0.1-SNAPSHOT: Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.1.2.RELEASE from/to nexus (http://nexus/repository/maven-group/): Connect to nexus:80 [nexus/10.107.244.32] failed: Connection timed out (Connection timed out) and 'parent.relativePath' points at no local POM @ line 5, column 10
+ @ 
+[ERROR] The build could not read 1 project -> [Help 1]
+[ERROR]   
+[ERROR]   The project com.tmax:spring-cloud-server:0.0.1-SNAPSHOT (/tmp/jenkinsTests.tmp/jenkins1322025199459086405test/workspace/job/pom.xml) has 1 error
+[ERROR]     Non-resolvable parent POM for com.tmax:spring-cloud-server:0.0.1-SNAPSHOT: Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.1.2.RELEASE from/to nexus (http://nexus/repository/maven-group/): Connect to nexus:80 [nexus/10.107.244.32] failed: Connection timed out (Connection timed out) and 'parent.relativePath' points at no local POM @ line 5, column 10 -> [Help 2]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+[ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/UnresolvableModelException
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Promote to Environments)
+Stage "Promote to Environments" skipped due to earlier failure(s)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
