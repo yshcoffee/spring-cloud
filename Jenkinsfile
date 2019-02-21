@@ -32,6 +32,8 @@ pipeline {
         branch 'master'
       }
       steps {
+      	credentialsId 'sukhee_yun'
+        url 'https://github.com/yshcoffee/spring-cloud-server.git'
         git 'https://github.com/yshcoffee/spring-cloud-server.git'
 
         // so we can retrieve the version in later steps
