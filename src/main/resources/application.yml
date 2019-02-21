@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/husseinterek/spring-cloud-repo.git
+          uri: https://github.com/yshcoffee/spring-cloud-repo.git
           
 eureka:
   instance:
